@@ -6,7 +6,7 @@
 #include <syslog.h>
 #include <signal.h>
 
-#define SNIFF_PID_PATH "/var/lib/sniffer/pid"
+#define SNIFF_PID_PATH "/var/lib/sniffer/pid.txt"
 
 void sigInt_hdlr(int sig)
 {

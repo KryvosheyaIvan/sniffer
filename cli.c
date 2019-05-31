@@ -63,6 +63,7 @@ int main(int argc, char* argv[])
 int start_hndlr(char **args) {
 	printf("start_hndlr \n");
 	
+	// launch hex file
 	execvp("./daemon", args);
 	
 	return 0;
@@ -73,12 +74,9 @@ int stop_hndlr(char **args) {
 	char deb[100];
 	
 	int pid_to_kill = getDaemonPID();
-	sprintf(deb,"ska: %d", pid_to_kill);
-	printf("%s",deb);
 	
 	
 	if(pid_to_kill != -1) {
-		printf("kill! \n");
 		kill(pid_to_kill,SIGINT);
 	}
 	
@@ -115,10 +113,12 @@ int numOfHndlrs(void) {
 int getDaemonPID(void) {
 
 	int pid = -1;
-	FILE* pid_file = fopen("/var/lib/sniffer/pid","w+");
+	FILE* pid_file = fopen("/var/lib/sniffer/pid.txt","r");
 	if(pid_file != NULL)
 	{
+		printf("\r\n there is such a file\r\n");
 		fscanf(pid_file,"%d",&pid);
+		fclose(pid_file);
 	}
 	
 	return pid;
